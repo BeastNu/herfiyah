@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'router.dart';
+import '../shared/router.dart';
 
 /// The root widget for the Herfiyah (حِرفيّة) beauty services marketplace.
 ///

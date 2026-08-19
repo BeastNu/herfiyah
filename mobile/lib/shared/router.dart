@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../admin/screens/admin_dashboard_screen.dart';
+import '../admin/screens/admin_login_screen.dart';
+import '../admin/screens/admin_provider_detail_screen.dart';
+import '../admin/screens/admin_providers_screen.dart';
+import '../provider/screens/provider_basic_info_screen.dart';
+import '../provider/screens/provider_contract_screen.dart';
+import '../provider/screens/provider_dashboard_screen.dart';
+import '../provider/screens/provider_otp_screen.dart';
+import '../provider/screens/provider_profile_setup_screen.dart';
+import '../provider/screens/provider_register_screen.dart';
+import '../provider/screens/provider_welcome_screen.dart';
+
 // ---------------------------------------------------------------------------
 // Route names — use these with context.goNamed() for type-safe navigation.
 // ---------------------------------------------------------------------------
 class RouteNames {
+  // --- Customer (mobile) routes ---
   static const splash = 'splash';
   static const login = 'login';
   static const register = 'register';
@@ -12,6 +25,21 @@ class RouteNames {
   static const profile = 'profile';
   static const serviceDetail = 'serviceDetail';
   static const booking = 'booking';
+
+  // --- Provider (web dashboard) routes ---
+  static const providerRegister = 'providerRegister';
+  static const providerOtp = 'providerOtp';
+  static const providerWelcome = 'providerWelcome';
+  static const providerBasicInfo = 'providerBasicInfo';
+  static const providerContract = 'providerContract';
+  static const providerProfileSetup = 'providerProfileSetup';
+  static const providerDashboard = 'providerDashboard';
+
+  // --- Admin panel routes ---
+  static const adminLogin = 'adminLogin';
+  static const adminDashboard = 'adminDashboard';
+  static const adminProviders = 'adminProviders';
+  static const adminProviderDetail = 'adminProviderDetail';
 }
 
 // ---------------------------------------------------------------------------
@@ -94,6 +122,81 @@ final GoRouter appRouter = GoRouter(
           title: 'Booking #$serviceId',
           message: 'حجز موعد — Book appointment',
         );
+      },
+    ),
+
+    // --- Provider (web dashboard) routes ---------------------------------
+    GoRoute(
+      name: RouteNames.providerRegister,
+      path: '/provider/register',
+      builder: (context, state) => const ProviderRegisterScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.providerOtp,
+      path: '/provider/otp',
+      builder: (context, state) {
+        // Phone number is passed via state.extra from the register screen.
+        return const ProviderOtpScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteNames.providerWelcome,
+      path: '/provider/welcome',
+      builder: (context, state) => const ProviderWelcomeScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.providerBasicInfo,
+      path: '/provider/basic-info',
+      builder: (context, state) => const ProviderBasicInfoScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.providerContract,
+      path: '/provider/contract',
+      builder: (context, state) => const ProviderContractScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.providerProfileSetup,
+      path: '/provider/profile-setup',
+      builder: (context, state) => const ProviderProfileSetupScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.providerDashboard,
+      path: '/provider/dashboard',
+      builder: (context, state) => const ProviderDashboardScreen(),
+    ),
+
+    // --- Admin panel routes -----------------------------------------------
+
+    GoRoute(
+      name: RouteNames.adminLogin,
+      path: '/admin/login',
+      builder: (context, state) => const AdminLoginScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.adminDashboard,
+      path: '/admin/dashboard',
+      builder: (context, state) => const AdminDashboardScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.adminProviders,
+      path: '/admin/providers',
+      builder: (context, state) => const AdminProvidersScreen(),
+    ),
+
+    GoRoute(
+      name: RouteNames.adminProviderDetail,
+      path: '/admin/provider/:providerId',
+      builder: (context, state) {
+        final providerId = state.pathParameters['providerId'] ?? '';
+        return AdminProviderDetailScreen(providerId: providerId);
       },
     ),
   ],

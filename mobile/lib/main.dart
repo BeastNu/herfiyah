@@ -3,14 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/app.dart';
-
-/// Supabase configuration — replace with your project's values.
-///
-/// You can find these in the Supabase dashboard under
-///   Settings → API → Project URL  /  anon public key.
-const String _supabaseUrl = 'https://your-project-id.supabase.co';
-const String _supabaseAnonKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder';
+import 'shared/config/env_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +12,8 @@ void main() async {
   // Supabase initialisation
   // -----------------------------------------------------------------------
   await Supabase.initialize(
-    url: _supabaseUrl,
-    anonKey: _supabaseAnonKey,
+    url: EnvConfig.supabaseUrl,
+    anonKey: EnvConfig.supabaseAnonKey,
   );
 
   runApp(
